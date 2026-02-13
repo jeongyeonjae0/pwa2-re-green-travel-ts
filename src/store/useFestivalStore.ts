@@ -1,16 +1,19 @@
 import { create } from 'zustand';
 import axios from 'axios';
 import type { Festival, FestivalState } from '../types/festival.types';
-import axiosConfig from '../configs/axiosConfig'; // 설정값 불러오기
+import axiosConfig from '../configs/axiosConfig';
 
 const useFestivalStore = create<FestivalState>((set) => ({
   festivals: [],
   isLoading: false,
   error: null,
+  page: 1,
+  scrollEventFlg: true,
 
-  fetchFestivals: async () => {
-    set({ isLoading: true, error: null });
-    
+  setScrollEventFlg: (flg) => set({ scrollEventFlg: flg }),
+
+  fetchFestivals: async (targetPage: number) => {
+    set({ isLoading: true });
     try {
       const response = await axios.get(`${axiosConfig.baseUrl}/areaBasedList1`, {
         params: {
@@ -19,23 +22,23 @@ const useFestivalStore = create<FestivalState>((set) => ({
           MobileApp: axiosConfig.MobileApp,
           _type: axiosConfig.type,
           arrange: axiosConfig.arrange,
+          numOfRows: axiosConfig.NUM_OF_ROWS,
+          pageNo: targetPage,
           contentTypeId: 15,
-          numOfRows: 10,
-          pageNo: 1,
         },
       });
 
       const data = response.data?.response?.body?.items?.item;
-      
-      if (data) {
-        set({ festivals: Array.isArray(data) ? data : [data], isLoading: false });
-      } else {
-        set({ festivals: [], isLoading: false });
-      }
-      
+      const newItems = Array.isArray(data) ? data : data ? [data] : [];
+
+      set((state) => ({
+        festivals: targetPage === 1 ? newItems : [...state.festivals, ...newItems],
+        page: targetPage,
+        isLoading: false,
+        scrollEventFlg: newItems.length > 0,
+      }));
     } catch (err) {
-      console.error(err);
-      set({ error: '데이터를 불러오는 중 오류가 발생했습니다.', isLoading: false });
+      set({ error: '로드 실패', isLoading: false, scrollEventFlg: false });
     }
   },
 }));

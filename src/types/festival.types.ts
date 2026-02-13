@@ -5,11 +5,15 @@ export interface Festival {
   firstimage?: string;
   eventstartdate: string;
   eventenddate: string;
+  createdtime?: string;
 }
 
 export interface FestivalState {
   festivals: Festival[];
   isLoading: boolean;
   error: string | null;
-  fetchFestivals: () => Promise<void>;
+  page: number;
+  scrollEventFlg: boolean;
+  setScrollEventFlg: (flg: boolean) => void;
+  fetchFestivals: (targetPage: number) => Promise<void>;
 }
