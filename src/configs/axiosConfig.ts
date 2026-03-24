@@ -14,7 +14,7 @@ const axiosConfig: AxiosConfig = {
   MobileApp: 'GreenTravel',
   type: 'json',
   arrange: 'O',
-  baseUrl: 'https://apis.data.go.kr/B551011/KorService2',
+  baseUrl: '/api/B551011/KorService2',
   NUM_OF_ROWS: 50,
 };
 
