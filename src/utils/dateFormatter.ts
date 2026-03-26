@@ -7,14 +7,19 @@ export const dateFormatter = {
   withHyphenYMD: (strDate: string): string => {
     if (!strDate || strDate.length < 8) return strDate;
 
-    return `${strDate.slice(0, 4)}-${strDate.slice(4, 6)}-${strDate.slice(6, 8)}`; 
-  }
+    return `${strDate.slice(0, 4)}-${strDate.slice(4, 6)}-${strDate.slice(6, 8)}`;
+  },
+
   /**
    * Date 객체를 `YYYYMMDD` 포맷으로 반환
-   * @param {Date} date 
-   * @returns {string} `YYYYMMDD` 포맷 
+   * @param date Date 객체
+   * @returns YYYYMMDD 포맷 문자열
    */
-  // formatDateToYMD: (date) => {
-  //   return `${date.getFullYear()}${(date.getMonth() + 1).toString().padStart(2, '0')}${(date.getDate() + 1).toString().padStart(2, '0')}`;
-  // }
+  formatDateToYMD: (date: Date): string => {
+    const year: number = date.getFullYear();
+    const month: string = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day: string = date.getDate().toString().padStart(2, '0');
+
+    return `${year}${month}${day}`;
+  }
 };
