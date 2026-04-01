@@ -15,7 +15,7 @@ const axiosConfig: AxiosConfig = {
   type: 'json',
   arrange: 'O',
   baseUrl: '/api/B551011/KorService2',
-  NUM_OF_ROWS: 50,
+  NUM_OF_ROWS: 12,
 };
 
 export default axiosConfig;
