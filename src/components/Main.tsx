@@ -1,22 +1,15 @@
 import { useNavigate } from 'react-router-dom';
-import titleImg from '../assets/andong_tal.png';
 import './Main.css';
 
 function Main() {
   const navigate = useNavigate();
 
-  const handleImageClick = (): void => {
-    navigate('/festivals');
-  };
-
   return (
     <>
-      <img 
-        className='title-img' 
-        onClick={handleImageClick} 
-        src={titleImg} 
-        alt="대문" 
-      />
+      <div className="main-container">
+      <img className='festival-title-img' onClick={() => { navigate('/festivals') }} src='/base/andong_tal.png'  alt="대문" />
+      <img className='stay-title-img' onClick={() => { navigate('/staies') }} src='/base/hotel_picture.png' alt="중문" />
+    </div>
     </>
   );
 }
