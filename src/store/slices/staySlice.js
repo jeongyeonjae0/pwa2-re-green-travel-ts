@@ -20,6 +20,7 @@ const staySlice = createSlice({
         if(action.payload.items?.item) {
           state.list = [...state.list, ...action.payload.items.item];
           state.page = action.payload.pageNO;
+          state.scrollEventFlg = true;
           localStorageUtil.setStayList(state.list);
           localStorageUtil.setStayPage(state.page);
           localStorageUtil.setStayScrollFlg(state.scrollEventFlg);
