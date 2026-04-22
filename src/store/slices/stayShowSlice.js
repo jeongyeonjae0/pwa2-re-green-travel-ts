@@ -1,14 +1,14 @@
-import festivalReducer from './slices/festivalSlice.js';
-import festivalShowReducer from './slices/festivalShowSlice.js';
-import stayReducer from './slices/staySlice.js';
-import stayShowReducer from './slices/stayShowSlice.js';
+import { configureStore } from "@reduxjs/toolkit";
+import festivalReducer from "../slices/festivalSlice.ts";
+import festivalShowReducer from "./festivalShowSlice.ts";
+import stayReducer from "./staySlice.js";
+import stayShowReducer from "./stayShowSlice.js";
 
-
-export default configureStore({
+export const store = configureStore({
   reducer: {
-   festival: festivalReducer, // slices 정의
-   festivalShow: festivalShowReducer,
-   stay: stayReducer,
-   stayShow: stayShowReducer,
-  }
+    festival: festivalReducer,
+    festivalShow: festivalShowReducer,
+    stay: stayReducer,
+    stayShow: stayShowReducer,
+  },
 });
