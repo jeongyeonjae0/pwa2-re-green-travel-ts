@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { stayIndex } from "../thunks/stayThunk.ts";
-import { localStorageUtil } from "../../utils/localStorageUtil.js";
+import { localStorageUtil } from "../../utils/localStorageUtil.ts";
 
 const staySlice = createSlice({
   name: 'staySlice',
